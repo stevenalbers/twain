@@ -4,6 +4,7 @@ import { firebaseApp } from "../firebase";
 import { Map, Scene } from "react-arcgis";
 
 import * as esriLoader from "esri-loader";
+import "../style.css";
 
 class App extends Component {
   constructor(props) {
@@ -34,18 +35,45 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // in this case options are only needed so we can configure dojo before loading the API
+    const options = {
+      // tell Dojo where to load other packages
+      dojoConfig: {
+        async: true,
+        packages: [
+          {
+            location: "/src/widgets/",
+            name: "widgets"
+          }
+        ]
+      }
+    };
+
     esriLoader
-      .loadModules([
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/layers/GraphicsLayer",
-        "esri/Graphic",
-        "esri/geometry/Point",
-        "esri/layers/FeatureLayer",
-        "esri/widgets/Home"
-      ])
+      .loadModules(
+        [
+          "esri/Map",
+          "esri/views/MapView",
+          "esri/layers/GraphicsLayer",
+          "esri/Graphic",
+          "esri/geometry/Point",
+          "esri/layers/FeatureLayer",
+          "esri/widgets/Home" /*,
+          "widgets/AddPoint"*/
+        ],
+        options
+      )
       .then(
-        ([Map, MapView, GraphicsLayer, Graphic, Point, FeatureLayer, Home]) => {
+        ([
+          Map,
+          MapView,
+          GraphicsLayer,
+          Graphic,
+          Point,
+          FeatureLayer,
+          Home,
+          AddPoint
+        ]) => {
           var map = new Map({
             basemap: "national-geographic"
           });
@@ -76,6 +104,12 @@ class App extends Component {
           });
           view.ui.add(homeButton, "top-left");
 
+          /*var addPoint = new AddPoint({
+            firstName: "John",
+            lastName: "Smith"
+          });
+          view.ui.add(addPoint, "top-right");
+*/
           this.state.data.features.forEach(function(feature) {
             var currentPoint = new Point(
               feature.geometry.coordinates,

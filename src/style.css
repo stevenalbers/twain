@@ -1,3 +1,11 @@
 .App {
 	margin: 5%;
 }
+
+.esri-hello-world {
+	font-family: "Helvetica Neue", sans-serif;
+	display: inline-block;
+}
+.esri-hello-world--emphasis {
+	font-weight: bold;
+}

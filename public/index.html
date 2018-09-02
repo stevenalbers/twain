@@ -13,6 +13,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
     <script src="https://js.arcgis.com/4.8/"></script>
+    <script>
+var locationPath = location.pathname.replace(/\/[^\/]+$/, "");
+window.dojoConfig = {
+  packages: [
+    {
+      name: "widgets",
+      location: locationPath + "src/widgets"
+    }
+  ]
+};
+</script>
+<style>
+  .esri-hello-world {
+    font-family: "Helvetica Neue", sans-serif;
+    display: inline-block;
+  }
+  .esri-hello-world--emphasis {
+    font-weight: bold;
+  }
+</style>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
