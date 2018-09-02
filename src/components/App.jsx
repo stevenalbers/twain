@@ -60,11 +60,11 @@ class App extends Component {
         var markerSymbol = {
           type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
           style: "circle",
-          color: [0, 76, 153],
+          color: [0, 204, 102],
           outline: {
             // autocasts as new SimpleLineSymbol()
             color: [255, 255, 255],
-            width: 1
+            width: 1.5
           }
         };
 
@@ -75,6 +75,19 @@ class App extends Component {
           );
           graphicsLayer.add(new Graphic(currentPoint, markerSymbol));
         });
+
+        view.on("click", getClickedMarker);
+
+        function getClickedMarker(event) {
+          view.hitTest(event).then(function(response) {
+            if (response.results.length > 0 && response.results[0].graphic) {
+              // Add story function handler here
+              // Using debug printouts for now
+              console.log("graphic", response.results[0].graphic.symbol.id);
+              alert(response.results[0].graphic.symbol.id);
+            }
+          });
+        }
       })
 
       .catch(err => {
