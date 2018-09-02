@@ -84,7 +84,8 @@ class App extends Component {
             graphicsLayer.add(new Graphic(currentPoint, markerSymbol));
           });
 
-          view.on("click", getClickedMarker);
+          view.on("pointer-move", getClickedMarker);
+          view.on("click", addStoryMarker);
 
           function getClickedMarker(event) {
             view.hitTest(event).then(function(response) {
@@ -95,6 +96,16 @@ class App extends Component {
                 alert(response.results[0].graphic.symbol.id);
               }
             });
+          }
+
+          function addStoryMarker(event) {
+            if (event.mapPoint) {
+              var point = event.mapPoint.clone();
+              point.z = undefined;
+              point.hasZ = false;
+
+              graphicsLayer.add(new Graphic(point, markerSymbol));
+            }
           }
         }
       )
