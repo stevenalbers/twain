@@ -84,18 +84,26 @@ class App extends Component {
             graphicsLayer.add(new Graphic(currentPoint, markerSymbol));
           });
 
-          view.on("pointer-move", getClickedMarker);
-          view.on("click", addStoryMarker);
+          view.on("click", handleEvent);
 
-          function getClickedMarker(event) {
+          function handleEvent(event) {
             view.hitTest(event).then(function(response) {
+              // If existing node is clicked
               if (response.results.length > 0 && response.results[0].graphic) {
-                // Add story function handler here
-                // Using debug printouts for now
-                console.log("graphic", response.results[0].graphic.symbol.id);
-                alert(response.results[0].graphic.symbol.id);
+                showStoryMarkerData(event, response);
+              }
+              // Otherwise create a new node
+              else {
+                addStoryMarker(event);
               }
             });
+          }
+
+          function showStoryMarkerData(event, response) {
+            // Add story function handler here
+            // Using debug printouts for now
+            console.log("graphic", response.results[0].graphic.symbol.id);
+            alert(response.results[0].graphic.symbol.id);
           }
 
           function addStoryMarker(event) {
