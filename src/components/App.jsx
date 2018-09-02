@@ -41,54 +41,63 @@ class App extends Component {
         "esri/layers/GraphicsLayer",
         "esri/Graphic",
         "esri/geometry/Point",
-        "esri/layers/FeatureLayer"
+        "esri/layers/FeatureLayer",
+        "esri/widgets/Home"
       ])
-      .then(([Map, MapView, GraphicsLayer, Graphic, Point, FeatureLayer]) => {
-        var map = new Map({
-          basemap: "national-geographic"
-        });
-        var view = new MapView({
-          map: map,
-          container: "viewDiv",
-          center: [-119.8138, 39.5296],
-          zoom: 14
-        });
-
-        var graphicsLayer = new GraphicsLayer();
-        map.add(graphicsLayer);
-
-        var markerSymbol = {
-          type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-          style: "circle",
-          color: [0, 204, 102],
-          outline: {
-            // autocasts as new SimpleLineSymbol()
-            color: [255, 255, 255],
-            width: 1.5
-          }
-        };
-
-        this.state.data.features.forEach(function(feature) {
-          var currentPoint = new Point(
-            feature.geometry.coordinates,
-            map.spatialReference
-          );
-          graphicsLayer.add(new Graphic(currentPoint, markerSymbol));
-        });
-
-        view.on("click", getClickedMarker);
-
-        function getClickedMarker(event) {
-          view.hitTest(event).then(function(response) {
-            if (response.results.length > 0 && response.results[0].graphic) {
-              // Add story function handler here
-              // Using debug printouts for now
-              console.log("graphic", response.results[0].graphic.symbol.id);
-              alert(response.results[0].graphic.symbol.id);
-            }
+      .then(
+        ([Map, MapView, GraphicsLayer, Graphic, Point, FeatureLayer, Home]) => {
+          var map = new Map({
+            basemap: "national-geographic"
           });
+
+          var view = new MapView({
+            map: map,
+            container: "viewDiv",
+            center: [-119.8138, 39.5296],
+            zoom: 14
+          });
+
+          var graphicsLayer = new GraphicsLayer();
+          map.add(graphicsLayer);
+
+          var markerSymbol = {
+            type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+            style: "circle",
+            color: [0, 204, 102],
+            outline: {
+              // autocasts as new SimpleLineSymbol()
+              color: [255, 255, 255],
+              width: 1.5
+            }
+          };
+
+          var homeButton = new Home({
+            view: view
+          });
+          view.ui.add(homeButton, "top-left");
+
+          this.state.data.features.forEach(function(feature) {
+            var currentPoint = new Point(
+              feature.geometry.coordinates,
+              map.spatialReference
+            );
+            graphicsLayer.add(new Graphic(currentPoint, markerSymbol));
+          });
+
+          view.on("click", getClickedMarker);
+
+          function getClickedMarker(event) {
+            view.hitTest(event).then(function(response) {
+              if (response.results.length > 0 && response.results[0].graphic) {
+                // Add story function handler here
+                // Using debug printouts for now
+                console.log("graphic", response.results[0].graphic.symbol.id);
+                alert(response.results[0].graphic.symbol.id);
+              }
+            });
+          }
         }
-      })
+      )
 
       .catch(err => {
         // handle any errors
