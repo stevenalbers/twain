@@ -42,10 +42,22 @@ class App extends Component {
         "esri/Graphic",
         "esri/geometry/Point",
         "esri/layers/FeatureLayer",
-        "esri/widgets/Home"
+        "esri/widgets/LayerList",
+        "esri/widgets/Home",
+        "esri/widgets/Expand"
       ])
       .then(
-        ([Map, MapView, GraphicsLayer, Graphic, Point, FeatureLayer, Home]) => {
+        ([
+          Map,
+          MapView,
+          GraphicsLayer,
+          Graphic,
+          Point,
+          FeatureLayer,
+          LayerList,
+          Home,
+          Expand
+        ]) => {
           var map = new Map({
             basemap: "national-geographic"
           });
@@ -57,24 +69,74 @@ class App extends Component {
             zoom: 14
           });
 
-          var graphicsLayer = new GraphicsLayer();
+          // TODO: Make this a collection of GraphicsLayers that we can add/remove
+          var graphicsLayer = new GraphicsLayer({
+            title: "Story 1"
+          });
           map.add(graphicsLayer);
 
           var markerSymbol = {
-            type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+            type: "simple-marker",
             style: "circle",
             color: [0, 204, 102],
             outline: {
-              // autocasts as new SimpleLineSymbol()
               color: [255, 255, 255],
               width: 1.5
             }
           };
 
+          var storyLayers = new LayerList({
+            //container: document.createElement("div"),
+            view: view,
+            listItemCreatedFunction: defineActions
+          });
+
+          function defineActions(event) {
+            var item = event.item;
+
+            if (item.title === "Story 1") {
+              item.actionsSections = [
+                [
+                  {
+                    title: "Rename Story",
+                    className: "esri-icon-edit",
+                    id: "rename-story"
+                  }
+                ],
+                [
+                  {
+                    title: "Delete Story",
+                    className: "esri-icon-erase",
+                    id: "delete-story"
+                  }
+                ]
+              ];
+            }
+          }
+
+          storyLayers.on("trigger-action", function(event) {
+            // Capture the action id.
+            var id = event.action.id;
+            console.log("layers", storyLayers);
+            if (id === "rename-story") {
+              alert("Rename");
+            } else if (id === "delete-story") {
+              alert("Story Deleted!");
+              graphicsLayer.removeAll();
+            }
+          });
+
           var homeButton = new Home({
             view: view
           });
           view.ui.add(homeButton, "top-left");
+
+          var expandButton = new Expand({
+            expanded: true,
+            view: view,
+            content: storyLayers
+          });
+          view.ui.add(expandButton, "bottom-right");
 
           this.state.data.features.forEach(function(feature) {
             var currentPoint = new Point(
