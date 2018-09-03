@@ -69,11 +69,15 @@ class App extends Component {
             zoom: 14
           });
 
-          // TODO: Make this a collection of GraphicsLayers that we can add/remove
-          var graphicsLayer = new GraphicsLayer({
-            title: "Story 1"
-          });
-          map.add(graphicsLayer);
+          // TODO: Have this function create an instance of a GraphicsLayer, not use one
+          // global one
+          var graphicsLayer;
+          function addGraphicsLayer() {
+            graphicsLayer = new GraphicsLayer({
+              title: "Story 1"
+            });
+            map.add(graphicsLayer);
+          }
 
           var markerSymbol = {
             type: "simple-marker",
@@ -123,8 +127,11 @@ class App extends Component {
             } else if (id === "delete-story") {
               alert("Story Deleted!");
               graphicsLayer.removeAll();
+              map.remove(graphicsLayer);
             }
           });
+
+          addGraphicsLayer();
 
           var homeButton = new Home({
             view: view
