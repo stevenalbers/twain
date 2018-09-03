@@ -20,7 +20,8 @@ class App extends Component {
             },
             id: 0,
             title: "SEM",
-            text: "Engineering building"
+            text:
+              "SEM\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean egestas metus nec velit imperdiet varius. Praesent feugiat ac enim in porttitor. Nam ut sollicitudin leo. Maecenas in lacus non urna iaculis mattis vel eu odio. Aenean tincidunt ipsum a lacus semper, in laoreet magna tempus. Maecenas et turpis vel ipsum tristique feugiat. Etiam dapibus erat id varius finibus."
           },
           {
             type: "Feature",
@@ -75,6 +76,14 @@ class App extends Component {
           Expand
         ]) => {
           //////////////////////////////////////////////////////////////////////
+          //Initialize local variables//////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////
+
+          var graphicsLayer;
+          var storyFeatures = this.state.data.features;
+          var currentActiveStory = 0;
+
+          //////////////////////////////////////////////////////////////////////
           //Initialize Map components///////////////////////////////////////////
           //////////////////////////////////////////////////////////////////////
 
@@ -88,19 +97,6 @@ class App extends Component {
             center: [-119.8138, 39.5296],
             zoom: 14
           });
-
-          // TODO: Have this function create an instance of a GraphicsLayer, not
-          // use one global one
-          var graphicsLayer;
-          function addGraphicsLayer() {
-            graphicsLayer = new GraphicsLayer({
-              title: "The Haunted Campus",
-              id: 1
-            });
-            map.add(graphicsLayer);
-          }
-          // Attach this to a "new story" handler when it's implemented
-          addGraphicsLayer();
 
           var activeMarkerSymbol = {
             type: "simple-marker",
@@ -124,36 +120,47 @@ class App extends Component {
             }
           };
 
-          this.state.data.features.forEach(function(feature) {
-            var currentPoint = new Point(
-              feature.geometry.coordinates,
-              map.spatialReference
-            );
+          // TODO: Have this function create an instance of a GraphicsLayer, not
+          // use one global one
+          function addGraphicsLayer() {
+            graphicsLayer = new GraphicsLayer({
+              title: "The Haunted Campus",
+              id: 1
+            });
+            map.add(graphicsLayer);
+          }
+          // Attach this to a "new story" handler when it's implemented
+          addGraphicsLayer();
 
-            var markerStory = {
-              title: feature.title,
-              text: feature.text,
-              id: feature.id
-            };
+          function initializeStories() {
+            graphicsLayer.removeAll();
+            currentActiveStory = 0;
 
-            if (feature.id === 0) {
+            storyFeatures.forEach(function(feature) {
+              var currentPoint = new Point(
+                feature.geometry.coordinates,
+                map.spatialReference
+              );
+
+              var markerStory = {
+                title: feature.title,
+                text: feature.text,
+                id: feature.id
+              };
+
+              var markerSymbol =
+                feature.id === 0 ? activeMarkerSymbol : inactiveMarkerSymbol;
+
               graphicsLayer.add(
                 new Graphic({
                   geometry: currentPoint,
-                  symbol: activeMarkerSymbol,
+                  symbol: markerSymbol,
                   attributes: markerStory
                 })
               );
-            } else {
-              graphicsLayer.add(
-                new Graphic({
-                  geometry: currentPoint,
-                  symbol: inactiveMarkerSymbol,
-                  attributes: markerStory
-                })
-              );
-            }
-          });
+            });
+          }
+          initializeStories();
 
           //////////////////////////////////////////////////////////////////////
           //Create story layers/////////////////////////////////////////////////
@@ -192,10 +199,11 @@ class App extends Component {
             // Capture the action id.
             var id = event.action.id;
             console.log("layers", storyLayers);
-            if (id === "Reset-story") {
-              alert("Reset Placeholder");
-            } else if (id === "reset-story") {
+            if (id === "reset-story") {
               alert("Story Reset!");
+              initializeStories();
+            } else if (id === "delete-story") {
+              alert("Story Deleted!");
               graphicsLayer.removeAll();
               map.remove(graphicsLayer);
             }
@@ -236,18 +244,15 @@ class App extends Component {
             });
           }
 
-          var currentActiveStory = 0;
           function showStoryMarkerData(event, response) {
             var clickedMarker = response.results[0];
-            // Add story function handler here
-            // Using debug printouts for now
-            console.log("graphic", clickedMarker /*.graphic.symbol.id*/);
-            alert(clickedMarker.graphic.attributes.title);
+
+            // Display story
             alert(clickedMarker.graphic.attributes.text);
+
             if (clickedMarker.graphic.attributes.id === currentActiveStory) {
               currentActiveStory += 1;
-              console.log("current story", currentActiveStory);
-              console.log("current graphics", graphicsLayer.graphics);
+
               // Dim newly read node
               var tempGraphic = clickedMarker.graphic;
               graphicsLayer.add(
@@ -283,6 +288,7 @@ class App extends Component {
               point.hasZ = false;
 
               graphicsLayer.add(new Graphic(point, activeMarkerSymbol));
+              console.log("Point", point);
             }
           }
         }
