@@ -172,9 +172,9 @@ class App extends Component {
               item.actionsSections = [
                 [
                   {
-                    title: "Rename Story",
-                    className: "esri-icon-edit",
-                    id: "rename-story"
+                    title: "Reset Story",
+                    className: "esri-icon-beginning",
+                    id: "reset-story"
                   }
                 ],
                 [
@@ -192,10 +192,10 @@ class App extends Component {
             // Capture the action id.
             var id = event.action.id;
             console.log("layers", storyLayers);
-            if (id === "rename-story") {
-              alert("Rename Placeholder");
-            } else if (id === "delete-story") {
-              alert("Story Deleted!");
+            if (id === "Reset-story") {
+              alert("Reset Placeholder");
+            } else if (id === "reset-story") {
+              alert("Story Reset!");
               graphicsLayer.removeAll();
               map.remove(graphicsLayer);
             }
