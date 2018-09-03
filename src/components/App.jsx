@@ -17,14 +17,30 @@ class App extends Component {
             geometry: {
               type: "Point",
               coordinates: [-119.8132, 39.5387]
-            }
+            },
+            id: 0,
+            title: "SEM",
+            text: "Engineering building"
+          },
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [-119.8177, 39.5391]
+            },
+            id: 1,
+            title: "Nye",
+            text: "Dorms"
           },
           {
             type: "Feature",
             geometry: {
               type: "Point",
               coordinates: [-119.8215, 39.4965]
-            }
+            },
+            id: 2,
+            title: "Washoe Golf Course",
+            text: "Driving"
           }
         ]
       }
@@ -58,6 +74,10 @@ class App extends Component {
           Home,
           Expand
         ]) => {
+          //////////////////////////////////////////////////////////////////////
+          //Initialize Map components///////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////
+
           var map = new Map({
             basemap: "national-geographic"
           });
@@ -69,25 +89,75 @@ class App extends Component {
             zoom: 14
           });
 
-          // TODO: Have this function create an instance of a GraphicsLayer, not use one
-          // global one
+          // TODO: Have this function create an instance of a GraphicsLayer, not
+          // use one global one
           var graphicsLayer;
           function addGraphicsLayer() {
             graphicsLayer = new GraphicsLayer({
-              title: "Story 1"
+              title: "The Haunted Campus",
+              id: 1
             });
             map.add(graphicsLayer);
           }
+          // Attach this to a "new story" handler when it's implemented
+          addGraphicsLayer();
 
-          var markerSymbol = {
+          var activeMarkerSymbol = {
             type: "simple-marker",
             style: "circle",
+            size: 12,
             color: [0, 204, 102],
             outline: {
               color: [255, 255, 255],
               width: 1.5
             }
           };
+
+          var inactiveMarkerSymbol = {
+            type: "simple-marker",
+            style: "circle",
+            size: 8,
+            color: [0, 153, 72],
+            outline: {
+              color: [230, 230, 230],
+              width: 1
+            }
+          };
+
+          this.state.data.features.forEach(function(feature) {
+            var currentPoint = new Point(
+              feature.geometry.coordinates,
+              map.spatialReference
+            );
+
+            var markerStory = {
+              title: feature.title,
+              text: feature.text,
+              id: feature.id
+            };
+
+            if (feature.id === 0) {
+              graphicsLayer.add(
+                new Graphic({
+                  geometry: currentPoint,
+                  symbol: activeMarkerSymbol,
+                  attributes: markerStory
+                })
+              );
+            } else {
+              graphicsLayer.add(
+                new Graphic({
+                  geometry: currentPoint,
+                  symbol: inactiveMarkerSymbol,
+                  attributes: markerStory
+                })
+              );
+            }
+          });
+
+          //////////////////////////////////////////////////////////////////////
+          //Create story layers/////////////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////
 
           var storyLayers = new LayerList({
             //container: document.createElement("div"),
@@ -98,7 +168,7 @@ class App extends Component {
           function defineActions(event) {
             var item = event.item;
 
-            if (item.title === "Story 1") {
+            if (item.title === "The Haunted Campus") {
               item.actionsSections = [
                 [
                   {
@@ -123,7 +193,7 @@ class App extends Component {
             var id = event.action.id;
             console.log("layers", storyLayers);
             if (id === "rename-story") {
-              alert("Rename");
+              alert("Rename Placeholder");
             } else if (id === "delete-story") {
               alert("Story Deleted!");
               graphicsLayer.removeAll();
@@ -131,7 +201,9 @@ class App extends Component {
             }
           });
 
-          addGraphicsLayer();
+          //////////////////////////////////////////////////////////////////////
+          //Create UI components////////////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////
 
           var homeButton = new Home({
             view: view
@@ -145,15 +217,11 @@ class App extends Component {
           });
           view.ui.add(expandButton, "bottom-right");
 
-          this.state.data.features.forEach(function(feature) {
-            var currentPoint = new Point(
-              feature.geometry.coordinates,
-              map.spatialReference
-            );
-            graphicsLayer.add(new Graphic(currentPoint, markerSymbol));
-          });
-
           view.on("click", handleEvent);
+
+          //////////////////////////////////////////////////////////////////////
+          //Handle map interactions/////////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////
 
           function handleEvent(event) {
             view.hitTest(event).then(function(response) {
@@ -168,11 +236,44 @@ class App extends Component {
             });
           }
 
+          var currentActiveStory = 0;
           function showStoryMarkerData(event, response) {
+            var clickedMarker = response.results[0];
             // Add story function handler here
             // Using debug printouts for now
-            console.log("graphic", response.results[0].graphic.symbol.id);
-            alert(response.results[0].graphic.symbol.id);
+            console.log("graphic", clickedMarker /*.graphic.symbol.id*/);
+            alert(clickedMarker.graphic.attributes.title);
+            alert(clickedMarker.graphic.attributes.text);
+            if (clickedMarker.graphic.attributes.id === currentActiveStory) {
+              currentActiveStory += 1;
+              console.log("current story", currentActiveStory);
+              console.log("current graphics", graphicsLayer.graphics);
+              // Dim newly read node
+              var tempGraphic = clickedMarker.graphic;
+              graphicsLayer.add(
+                new Graphic({
+                  geometry: tempGraphic.geometry,
+                  symbol: inactiveMarkerSymbol,
+                  attributes: tempGraphic.attributes
+                })
+              );
+              graphicsLayer.remove(clickedMarker.graphic);
+
+              // Brighten next node in the story
+              var nextGraphic = graphicsLayer.graphics.items.find(element => {
+                if (element.attributes.id === currentActiveStory) {
+                  return element;
+                }
+              });
+              graphicsLayer.add(
+                new Graphic({
+                  geometry: nextGraphic.geometry,
+                  symbol: activeMarkerSymbol,
+                  attributes: nextGraphic.attributes
+                })
+              );
+              graphicsLayer.remove(nextGraphic);
+            }
           }
 
           function addStoryMarker(event) {
@@ -181,7 +282,7 @@ class App extends Component {
               point.z = undefined;
               point.hasZ = false;
 
-              graphicsLayer.add(new Graphic(point, markerSymbol));
+              graphicsLayer.add(new Graphic(point, activeMarkerSymbol));
             }
           }
         }
