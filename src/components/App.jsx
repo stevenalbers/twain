@@ -461,6 +461,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <h1 style={{ margin: "2%" }}>TwainJS</h1>
         <div
           id="viewDiv"
           style={{ height: "700px" }}
@@ -468,7 +469,11 @@ class App extends Component {
         >
           {" "}
         </div>
-        <button className="btn btn-danger" onClick={() => this.signOut()}>
+        <button
+          className="btn btn-danger"
+          style={{ margin: "2%" }}
+          onClick={() => this.signOut()}
+        >
           Sign Out
         </button>
       </div>
