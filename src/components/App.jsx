@@ -18,24 +18,49 @@ class App extends Component {
               type: "Feature",
               geometry: {
                 type: "Point",
-                coordinates: [-119.8132, 39.5387]
+                coordinates: [-119.8139, 39.5378]
               },
               storyId: 0,
               storyOrder: 0,
-              title: "SEM",
+              title: "Morrill",
               text:
-                "SEM\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean egestas metus nec velit imperdiet varius. Praesent feugiat ac enim in porttitor. Nam ut sollicitudin leo. Maecenas in lacus non urna iaculis mattis vel eu odio. Aenean tincidunt ipsum a lacus semper, in laoreet magna tempus. Maecenas et turpis vel ipsum tristique feugiat. Etiam dapibus erat id varius finibus."
+                "Morrill Hall\n\nStrange happenings have been afoot all around campus. You’re the only one around here who believes me; who’s seen what I’ve seen. You’ll help me get to the bottom of this, won’t you? Good. It’s not like you had a choice or anything. Morrill Hall is the oldest building here, so if there’s any place to start, I’d say it’s here. Go check out the second floor, I’ll be down here if you need me.\n….\nNothing yet, huh? Maybe we should check somewhere else. Head over to Scrugham Engineering & I’ll meet you there. My gut’s telling me to look around here a little more."
             },
             {
               type: "Feature",
               geometry: {
                 type: "Point",
-                coordinates: [-119.8177, 39.5391]
+                coordinates: [-119.8132, 39.5387]
               },
               storyId: 0,
               storyOrder: 1,
-              title: "Nye",
-              text: "Dorms"
+              title: "SEM",
+              text:
+                "Scrugham Engineering and Mines\n\nYou’ll never believe what just happened to me! Right as you left I heard a crash upstairs so I went to go check it out. As I got there, I could have sworn I saw someone - a girl, I think - slam a closet door shut, but when I opened it… Empty. Now more than ever I’m sure there’s something going on around here.\n….\nI don’t think there’s anything here. I’ve heard reports of screams coming from the engineering lab late at night, but I’m pretty sure those are just students working on their semester projects. Lincoln Hall’s up next. Let’s go!"
+            },
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [-119.8163, 39.5394]
+              },
+              storyId: 0,
+              storyOrder: 2,
+              title: "Lincoln",
+              text:
+                "Lincoln Hall\n\nPeople have been reporting that their phones start wigging out when they walk past here, so I know we’re close. Take a look around and let me know if you find anything.\n….\nWhoa, is that an old rifle? Well, part of one anyway… I wonder if that belonged to James Champagne. Word on the street is that a hundred years ago he shot himself while cleaning his rifle - I’d be shocked if that wasn’t his. Great find! Hey, while we were walking past the quad I thought I saw something back at Morrill. I’ma head back there really quick, but hit me up if anything weird happens. Whatever you do, don’t go anywhere."
+            },
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [-119.8176, 39.5402]
+              },
+              storyId: 0,
+              storyOrder: 3,
+              title: "LLC",
+              text:
+                "LLC\n\nThere you are! Sheesh, it took me hours to find you. I told you not to move! Why’d you come here, and where’d you get that shovel? You’re telling me the gun possessed you? I mean, I believe you but why here? Oh well, let’s start digging, I guess.\n….\nI don’t believe it… Are these… Human remains? They’re everywhere down here! How did nobody come across this before? You know what - I think I’ve figured it out. The school’s built on an ancient burial ground, and recently we’ve been angering the spirits. I’ve heard of this happening before but I never thought our own campus would actually have evil spirits roaming around right under our noses. That about wraps it up. Thanks for the help! I couldn’t have done it without ya!"
             }
           ],
           [
@@ -43,12 +68,37 @@ class App extends Component {
               type: "Feature",
               geometry: {
                 type: "Point",
-                coordinates: [-119.8215, 39.4965]
+                coordinates: [-119.8161, 39.524]
               },
               storyId: 1,
               storyOrder: 0,
-              title: "Washoe Golf Course",
-              text: "Driving"
+              title: "Wingfield Park",
+              text:
+                "Wingfield Park\n\nThere’s a band performing here at 3:00PM. Pay attention to their setlist: Unscramble the first letter of each song title to find out where to go next."
+            },
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [-119.8326, 39.5208]
+              },
+              storyId: 1,
+              storyOrder: 1,
+              title: "Idlewild Park",
+              text:
+                "Idlewild Park\n\nI’ve hidden the next clue somewhere in the rose garden. That band’s name should give you a hint as to where you should be looking."
+            },
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [-119.8266, 39.5465]
+              },
+              storyId: 1,
+              storyOrder: 2,
+              title: "Rancho San Rafael",
+              text:
+                "Rancho San Rafael\nYou made it to the final step! No more puzzles here: the first one to bring me a rock from the “N” at the top of the mountain is the winner!"
             }
           ]
         ]
@@ -161,7 +211,7 @@ class App extends Component {
               storyId: 0
             });
             storyLayer1 = new GraphicsLayer({
-              title: "Other Story",
+              title: "Scavenger Hunt",
               storyId: 1
             });
             map.add(storyLayer0);
