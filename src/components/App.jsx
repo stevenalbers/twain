@@ -22,9 +22,9 @@ class App extends Component {
               },
               storyId: 0,
               storyOrder: 0,
-              title: "Morrill",
+              title: "Morrill Hall",
               text:
-                "Morrill Hall\n\nStrange happenings have been afoot all around campus. You’re the only one around here who believes me; who’s seen what I’ve seen. You’ll help me get to the bottom of this, won’t you? Good. It’s not like you had a choice or anything. Morrill Hall is the oldest building here, so if there’s any place to start, I’d say it’s here. Go check out the second floor, I’ll be down here if you need me.\n….\nNothing yet, huh? Maybe we should check somewhere else. Head over to Scrugham Engineering & I’ll meet you there. My gut’s telling me to look around here a little more."
+                "Strange happenings have been afoot all around campus. You’re the only one around here who believes me; who’s seen what I’ve seen. You’ll help me get to the bottom of this, won’t you? Good. It’s not like you had a choice or anything. Morrill Hall is the oldest building here, so if there’s any place to start, I’d say it’s here. Go check out the second floor, I’ll be down here if you need me. <br /><br />....<br /><br />Nothing yet, huh? Maybe we should check somewhere else. Head over to Scrugham Engineering & I’ll meet you there. My gut’s telling me to look around here a little more."
             },
             {
               type: "Feature",
@@ -34,9 +34,9 @@ class App extends Component {
               },
               storyId: 0,
               storyOrder: 1,
-              title: "SEM",
+              title: "Scrugham Engineering & Mines",
               text:
-                "Scrugham Engineering and Mines\n\nYou’ll never believe what just happened to me! Right as you left I heard a crash upstairs so I went to go check it out. As I got there, I could have sworn I saw someone - a girl, I think - slam a closet door shut, but when I opened it… Empty. Now more than ever I’m sure there’s something going on around here.\n….\nI don’t think there’s anything here. I’ve heard reports of screams coming from the engineering lab late at night, but I’m pretty sure those are just students working on their semester projects. Lincoln Hall’s up next. Let’s go!"
+                "You’ll never believe what just happened to me! Right as you left I heard a crash upstairs so I went to go check it out. As I got there, I could have sworn I saw someone - a girl, I think - slam a closet door shut, but when I opened it… Empty. Now more than ever I’m sure there’s something going on around here.<br /><br />....<br /><br />I don’t think there’s anything here. I’ve heard reports of screams coming from the engineering lab late at night, but I’m pretty sure those are just students working on their semester projects. Lincoln Hall’s up next. Let’s go!"
             },
             {
               type: "Feature",
@@ -46,9 +46,9 @@ class App extends Component {
               },
               storyId: 0,
               storyOrder: 2,
-              title: "Lincoln",
+              title: "Lincoln Hall",
               text:
-                "Lincoln Hall\n\nPeople have been reporting that their phones start wigging out when they walk past here, so I know we’re close. Take a look around and let me know if you find anything.\n….\nWhoa, is that an old rifle? Well, part of one anyway… I wonder if that belonged to James Champagne. Word on the street is that a hundred years ago he shot himself while cleaning his rifle - I’d be shocked if that wasn’t his. Great find! Hey, while we were walking past the quad I thought I saw something back at Morrill. I’ma head back there really quick, but hit me up if anything weird happens. Whatever you do, don’t go anywhere."
+                "People have been reporting that their phones start wigging out when they walk past here, so I know we’re close. Take a look around and let me know if you find anything.<br /><br />....<br /><br />Whoa, is that an old rifle? Well, part of one anyway… I wonder if that belonged to James Champagne. Word on the street is that a hundred years ago he shot himself while cleaning his rifle - I’d be shocked if that wasn’t his. Great find! Hey, while we were walking past the quad I thought I saw something back at Morrill. I’ma head back there really quick, but hit me up if anything weird happens. Whatever you do, don’t go anywhere."
             },
             {
               type: "Feature",
@@ -58,9 +58,9 @@ class App extends Component {
               },
               storyId: 0,
               storyOrder: 3,
-              title: "LLC",
+              title: "Construction Site",
               text:
-                "LLC\n\nThere you are! Sheesh, it took me hours to find you. I told you not to move! Why’d you come here, and where’d you get that shovel? You’re telling me the gun possessed you? I mean, I believe you but why here? Oh well, let’s start digging, I guess.\n….\nI don’t believe it… Are these… Human remains? They’re everywhere down here! How did nobody come across this before? You know what - I think I’ve figured it out. The school’s built on an ancient burial ground, and recently we’ve been angering the spirits. I’ve heard of this happening before but I never thought our own campus would actually have evil spirits roaming around right under our noses. That about wraps it up. Thanks for the help! I couldn’t have done it without ya!"
+                "There you are! Sheesh, it took me hours to find you. I told you not to move! Why’d you come here, and where’d you get that shovel? You’re telling me the gun possessed you? I mean, I believe you but why here? Oh well, let’s start digging, I guess.<br /><br />....<br /><br />I don’t believe it… Are these… Human remains? They’re everywhere down here! How did nobody come across this before? You know what - I think I’ve figured it out. The school’s built on an ancient burial ground, and recently we’ve been angering the spirits. I’ve heard of this happening before but I never thought our own campus would actually have evil spirits roaming around right under our noses. That about wraps it up. Thanks for the help! I couldn’t have done it without ya!"
             }
           ],
           [
@@ -74,7 +74,7 @@ class App extends Component {
               storyOrder: 0,
               title: "Wingfield Park",
               text:
-                "Wingfield Park\n\nThere’s a band performing here at 3:00PM. Pay attention to their setlist: Unscramble the first letter of each song title to find out where to go next."
+                "There’s a band performing here at 3:00PM. Pay attention to their setlist: Unscramble the first letter of each song title to find out where to go next."
             },
             {
               type: "Feature",
@@ -86,7 +86,7 @@ class App extends Component {
               storyOrder: 1,
               title: "Idlewild Park",
               text:
-                "Idlewild Park\n\nI’ve hidden the next clue somewhere in the rose garden. That band’s name should give you a hint as to where you should be looking."
+                "I’ve hidden the next clue somewhere in the rose garden. That band’s name should give you a hint as to where you should be looking."
             },
             {
               type: "Feature",
@@ -98,7 +98,7 @@ class App extends Component {
               storyOrder: 2,
               title: "Rancho San Rafael",
               text:
-                "Rancho San Rafael\nYou made it to the final step! No more puzzles here: the first one to bring me a rock from the “N” at the top of the mountain is the winner!"
+                "You made it to the final step! No more puzzles here: the first one to bring me a rock from the “N” at the top of the mountain is the winner!"
             }
           ]
         ]
@@ -238,16 +238,28 @@ class App extends Component {
                 storyOrder: feature.storyOrder
               };
 
+              console.log("marker story", markerStory);
+
               var markerSymbol =
                 feature.storyOrder === 0
                   ? activeMarkerSymbol0
                   : inactiveMarkerSymbol0;
 
+              // TODO: Unify graphic creation
               storyLayer0.add(
                 new Graphic({
                   geometry: currentPoint,
                   symbol: markerSymbol,
-                  attributes: markerStory
+                  attributes: markerStory,
+                  popupTemplate: {
+                    title: feature.title,
+                    content: [
+                      {
+                        type: "text",
+                        text: feature.text
+                      }
+                    ]
+                  }
                 })
               );
             });
@@ -274,7 +286,16 @@ class App extends Component {
                 new Graphic({
                   geometry: currentPoint,
                   symbol: markerSymbol,
-                  attributes: markerStory
+                  attributes: markerStory,
+                  popupTemplate: {
+                    title: feature.title,
+                    content: [
+                      {
+                        type: "text",
+                        text: feature.text
+                      }
+                    ]
+                  }
                 })
               );
             });
@@ -369,8 +390,6 @@ class App extends Component {
           function showStoryMarkerData(event, response) {
             var clickedMarker = response.results[0];
             console.log("marker", clickedMarker);
-            // Display story
-            alert(clickedMarker.graphic.attributes.text);
 
             // Check which story is active & set properties
             // TODO: Overhaul this big time. Once stories can be instantiated simply utilize their properties directly
@@ -378,12 +397,14 @@ class App extends Component {
             var storyLayer = storyLayer0;
             var activeMarkerSymbol = activeMarkerSymbol0;
             var inactiveMarkerSymbol = inactiveMarkerSymbol0;
+            var storyFeatures = storyFeatures0;
 
             if (clickedMarker.graphic.attributes.storyId === 1) {
               currentActiveStory = currentActiveStory1;
               storyLayer = storyLayer1;
               activeMarkerSymbol = activeMarkerSymbol1;
-              var inactiveMarkerSymbol = inactiveMarkerSymbol1;
+              inactiveMarkerSymbol = inactiveMarkerSymbol1;
+              storyFeatures = storyFeatures1;
             }
 
             if (
@@ -393,11 +414,14 @@ class App extends Component {
 
               // Dim newly read node
               var tempGraphic = clickedMarker.graphic;
+
+              console.log("tempgraphic", tempGraphic);
               storyLayer.add(
                 new Graphic({
                   geometry: tempGraphic.geometry,
                   symbol: inactiveMarkerSymbol,
-                  attributes: tempGraphic.attributes
+                  attributes: tempGraphic.attributes,
+                  popupTemplate: tempGraphic.popupTemplate
                 })
               );
               storyLayer.remove(clickedMarker.graphic);
@@ -412,7 +436,8 @@ class App extends Component {
                 new Graphic({
                   geometry: nextGraphic.geometry,
                   symbol: activeMarkerSymbol,
-                  attributes: nextGraphic.attributes
+                  attributes: nextGraphic.attributes,
+                  popupTemplate: nextGraphic.popupTemplate
                 })
               );
               storyLayer.remove(nextGraphic);
@@ -464,7 +489,7 @@ class App extends Component {
         <h1 style={{ margin: "2%" }}>TwainJS</h1>
         <div
           id="viewDiv"
-          style={{ height: "700px" }}
+          style={{ height: "750px" }}
           onLoad={this.handleMapLoad}
         >
           {" "}

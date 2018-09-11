@@ -6,7 +6,7 @@
     "@types/arcgis-js-api": "^4.8.1",
     "esri-loader": "^2.4.0",
     "firebase": "^5.4.2",
-    "react": "^16.4.2",
+    "react": "^16.5.0",
     "react-arcgis": "^3.3.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
