@@ -451,6 +451,17 @@ class App extends Component {
             }
           }
 
+          // TODO: Initialize this with other variables, make title & text fields edit-able
+          // Will also need to attach a mechanism for keeping track of story order. This would be a good time to turn addStoryMarker into a generator function
+          var addStoryPopupTemplate = {
+            title: "feature.title",
+            content: [
+              {
+                type: "text",
+                text: "feature.text"
+              }
+            ]
+          };
           // Currently a debug function. Eventually want to implement user-generated markers/stories
           function addStoryMarker(event) {
             if (event.mapPoint) {
@@ -458,7 +469,13 @@ class App extends Component {
               point.z = undefined;
               point.hasZ = false;
 
-              storyLayer0.add(new Graphic(point, activeMarkerSymbol0));
+              storyLayer0.add(
+                new Graphic({
+                  geometry: point,
+                  symbol: activeMarkerSymbol0,
+                  popupTemplate: addStoryPopupTemplate
+                })
+              );
               console.log("Point", point);
             }
           }
