@@ -451,17 +451,24 @@ class App extends Component {
             }
           }
 
-          // TODO: Initialize this with other variables, make title & text fields edit-able
-          // Will also need to attach a mechanism for keeping track of story order. This would be a good time to turn addStoryMarker into a generator function
+          // TODO: Need to attach a mechanism for keeping track of story order. This would be a good time to turn addStoryMarker into a generator function
+          var submitStory = {
+            title: "Submit Story Node",
+            id: "submit-story"
+          };
           var addStoryPopupTemplate = {
             title: "feature.title",
             content: [
               {
                 type: "text",
-                text: "feature.text"
+                // TODO: Potentially add more input fields for order? Or just do that programmatically once we pull the story down from firebase
+                text:
+                  "Enter story here:<br /><input type='text', id='submit-story' />"
               }
-            ]
+            ],
+            actions: [submitStory]
           };
+
           // Currently a debug function. Eventually want to implement user-generated markers/stories
           function addStoryMarker(event) {
             if (event.mapPoint) {
@@ -469,14 +476,24 @@ class App extends Component {
               point.z = undefined;
               point.hasZ = false;
 
-              storyLayer0.add(
-                new Graphic({
-                  geometry: point,
-                  symbol: activeMarkerSymbol0,
-                  popupTemplate: addStoryPopupTemplate
-                })
-              );
-              console.log("Point", point);
+              var graphic = new Graphic({
+                geometry: point,
+                symbol: activeMarkerSymbol0,
+                popupTemplate: addStoryPopupTemplate
+              });
+
+              storyLayer0.add(graphic);
+              console.log("graphic", storyLayer0);
+
+              // Log the written story to firebase with story order
+              view.popup.on("trigger-action", function(event) {
+                if (event.action.id === "submit-story") {
+                  console.log(
+                    "Story:",
+                    document.getElementById("submit-story").value
+                  );
+                }
+              });
             }
           }
         }
