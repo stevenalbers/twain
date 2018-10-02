@@ -2,10 +2,11 @@
   "name": "twain",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://stevenalbers.com/react/twain",
   "dependencies": {
     "@types/arcgis-js-api": "^4.8.1",
     "esri-loader": "^2.4.0",
-    "firebase": "^5.4.2",
+    "firebase": "^5.5.2",
     "react": "^16.5.0",
     "react-arcgis": "^3.3.2",
     "react-dom": "^16.4.2",

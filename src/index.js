@@ -26,10 +26,10 @@ firebaseApp.auth().onAuthStateChanged(user => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router path="/" history={browserHistory}>
-      <Route path="/app" component={App} />
-      <Route path="/signin" component={SignIn} />
-      <Route path="/signup" component={SignUp} />
+    <Router basename={"/react/twain"} history={browserHistory}>
+      <Route path={`${process.env.PUBLIC_URL}/app`} component={App} />
+      <Route path={`${process.env.PUBLIC_URL}/signin`} component={SignIn} />
+      <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignUp} />
     </Router>
   </Provider>,
   document.getElementById("root")
