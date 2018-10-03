@@ -2,13 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { Router, Route, browserHistory } from "react-router";
+import { Router, Route } from "react-router-dom";
 import { firebaseApp } from "./firebase";
 import App from "./components/App.jsx";
 import SignIn from "./components/SignIn.jsx";
 import SignUp from "./components/SignUp.jsx";
 import reducer from "./reducers";
 import { logUser } from "./actions";
+import history from './history';
 
 const store = createStore(reducer);
 
@@ -17,19 +18,24 @@ firebaseApp.auth().onAuthStateChanged(user => {
     console.log("user logged in", user);
     const { email } = user;
     store.dispatch(logUser(email));
-    browserHistory.push("/app");
+      console.log(this.props);
+        history.push('/app')
   } else {
     console.log("user not logged in", user);
-    browserHistory.replace("/signin");
+        history.push('/signin')
   }
 });
 
+const baseURL = process.env.PUBLIC_URL + "/react/twain";
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router basename={"/react/twain"} history={browserHistory}>
-      <Route path={`${process.env.PUBLIC_URL}/app`} component={App} />
-      <Route path={`${process.env.PUBLIC_URL}/signin`} component={SignIn} />
-      <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignUp} />
+    <Router history={history} basepath="baseURL">
+    <div>
+      <Route path="/app" component={App} />
+      <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+      </div>
     </Router>
   </Provider>,
   document.getElementById("root")
