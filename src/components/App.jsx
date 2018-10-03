@@ -380,8 +380,8 @@ class App extends Component {
               if (response.results.length > 0 && response.results[0].graphic) {
                 showStoryMarkerData(event, response);
               }
-              // Otherwise create a new node
-              else {
+              // Create a new node if right clicked
+              else if (event.button === 2) {
                 addStoryMarker(event);
               }
             });
