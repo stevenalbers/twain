@@ -29,8 +29,12 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div className="form-inline">
+      <div className="form-inline" style={{ margin: "2%" }}>
         <h2>Sign In</h2>
+        <p>
+          Heads up! Don't use any sensitive emails/passwords here; any
+          name@email will work even if it isn't a valid address.
+        </p>
         <div>
           <input
             className="form-control"
