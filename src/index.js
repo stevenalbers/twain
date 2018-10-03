@@ -26,11 +26,9 @@ firebaseApp.auth().onAuthStateChanged(user => {
   }
 });
 
-const baseURL = process.env.PUBLIC_URL + "/react/twain";
-
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history} basepath="baseURL">
+    <Router history={history} basepath="/react/twain">
     <div>
       <Route path="/app" component={App} />
       <Route path="/signin" component={SignIn} />
