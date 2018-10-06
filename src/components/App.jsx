@@ -457,13 +457,13 @@ class App extends Component {
             id: "submit-story"
           };
           var addStoryPopupTemplate = {
-            title: "feature.title",
+            title: "New Story Marker",
             content: [
               {
                 type: "text",
                 // TODO: Potentially add more input fields for order? Or just do that programmatically once we pull the story down from firebase
                 text:
-                  "Enter story here:<br /><input type='text', id='submit-story' />"
+                  "Enter story title:<br /><input type='text', id='submit-story-title' /><br />Enter story here:<br /><textarea id='submit-story-content' />"
               }
             ],
             actions: [submitStory]
@@ -490,7 +490,8 @@ class App extends Component {
                 if (event.action.id === "submit-story") {
                   console.log(
                     "Story:",
-                    document.getElementById("submit-story").value
+                    document.getElementById("submit-story-title").value,
+                    document.getElementById("submit-story-content").value
                   );
                 }
               });
