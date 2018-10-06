@@ -7,6 +7,9 @@ Geo-stories & scavenger hunts
 
 TwainJS is a web-based storytelling/experience sharing platform built with [ArcGIS](https://developers.arcgis.com/javascript/), and is in early development. Users will be able to create sequential storytelling nodes in & around their city and share those experiences with others, who can interact with those nodes once they go to the physical location marked on the map. Perhaps you want to give people a self-guided tour of your city's downtown, or maybe you want to create a scavenger hunt for your friends. Whatever the case, TwainJS has you covered.
 
+#### [Interactive Demo](http://stevenalbers.com/react/twain/)
+
+
 ## Tools & Libraries
 
 - [ArcGIS](https://developers.arcgis.com/javascript/)
