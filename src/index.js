@@ -9,7 +9,7 @@ import SignIn from "./components/SignIn.jsx";
 import SignUp from "./components/SignUp.jsx";
 import reducer from "./reducers";
 import { logUser } from "./actions";
-import history from './history';
+import history from "./history";
 
 const store = createStore(reducer);
 
@@ -18,21 +18,21 @@ firebaseApp.auth().onAuthStateChanged(user => {
     console.log("user logged in", user);
     const { email } = user;
     store.dispatch(logUser(email));
-      console.log(this.props);
-        history.push('/app')
+    console.log(this.props);
+    history.push("/app");
   } else {
     console.log("user not logged in", user);
-        history.push('/signin')
+    history.push("/signin");
   }
 });
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history} basepath="/react/twain">
-    <div>
-      <Route path="/app" component={App} />
-      <Route path="/signin" component={SignIn} />
-      <Route path="/signup" component={SignUp} />
+      <div style={{ height: "98%", width: "98%", margin: "auto" }}>
+        <Route path="/app" component={App} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
       </div>
     </Router>
   </Provider>,

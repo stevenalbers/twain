@@ -519,13 +519,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ height: "100%" }}>
         <h1 style={{ margin: "2%" }}>TwainJS</h1>
-        <div
-          id="viewDiv"
-          style={{ height: "750px" }}
-          onLoad={this.handleMapLoad}
-        >
+        <div id="viewDiv" style={{ height: "90%" }} onLoad={this.handleMapLoad}>
           {" "}
         </div>
         <button
